@@ -1,26 +1,251 @@
 @import "tailwindcss";
 
+/* =========================================================
+   THEME VARIABLES
+========================================================= */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #faf9f6;
+  --foreground: #0f172a;
 }
+
+/* =========================================================
+   TAILWIND THEME
+========================================================= */
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
+/* =========================================================
+   DARK MODE
+========================================================= */
+
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0b1220;
+    --foreground: #f8fafc;
   }
+}
+
+/* =========================================================
+   BASE STYLES
+========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+/* =========================================================
+   HERO BACKGROUND
+========================================================= */
+
+.hero-background {
+  background:
+    radial-gradient(
+      circle at 78% 28%,
+      rgba(212, 175, 55, 0.12),
+      transparent 28%
+    ),
+
+    radial-gradient(
+      circle at 18% 82%,
+      rgba(15, 81, 50, 0.05),
+      transparent 35%
+    ),
+
+    linear-gradient(
+      180deg,
+      #fffdfc 0%,
+      #faf9f6 100%
+    );
+}
+
+/* =========================================================
+   GOLD RING
+========================================================= */
+
+.gold-ring {
+  background: linear-gradient(
+    145deg,
+    #fff7c8 0%,
+    #f8d568 18%,
+    #d4af37 45%,
+    #b8860b 72%,
+    #8c5f00 100%
+  );
+
+  box-shadow:
+    0 30px 80px rgba(212, 175, 55, 0.28),
+    inset 0 2px 2px rgba(255,255,255,.65),
+    inset 0 -2px 2px rgba(0,0,0,.12);
+}
+
+/* =========================================================
+   HERO GLOW
+========================================================= */
+
+.hero-glow {
+  background: radial-gradient(
+    circle,
+    rgba(248,213,104,.32) 0%,
+    rgba(248,213,104,.15) 45%,
+    transparent 75%
+  );
+
+  filter: blur(60px);
+}
+
+/* =========================================================
+   BUTTON ANIMATIONS
+========================================================= */
+
+button,
+a {
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    background-color .25s ease,
+    color .25s ease,
+    border-color .25s ease;
+}
+
+button:hover,
+a:hover {
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   CARD ANIMATIONS
+========================================================= */
+
+.card-hover {
+  transition: all .35s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 60px rgba(15,23,42,.08);
+}
+
+/* =========================================================
+   GOLD GLOW ANIMATION
+========================================================= */
+
+@keyframes glowPulse {
+
+  0%,
+  100% {
+    opacity: .45;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: .75;
+    transform: scale(1.03);
+  }
+}
+
+.glow-pulse {
+  animation: glowPulse 6s ease-in-out infinite;
+}
+
+/* =========================================================
+   FADE UP
+========================================================= */
+
+@keyframes fadeUp {
+
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-up {
+  animation: fadeUp .8s ease forwards;
+}
+
+/* =========================================================
+   FLOATING PARTICLES
+========================================================= */
+
+@keyframes float {
+
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.float {
+  animation: float 8s ease-in-out infinite;
+}
+
+/* =========================================================
+   IMAGE QUALITY
+========================================================= */
+
+.hero-image {
+  filter:
+    contrast(1.04)
+    brightness(1.02)
+    saturate(1.03);
+}
+
+/* =========================================================
+   SELECTION
+========================================================= */
+
+::selection {
+  background: rgba(15,81,50,.18);
+  color: #0f172a;
+}
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #faf9f6;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d4af37;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b68d1b;
 }

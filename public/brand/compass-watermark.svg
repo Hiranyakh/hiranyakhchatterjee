@@ -1,0 +1,136 @@
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 1000 1000"
+    fill="none">
+
+    <defs>
+
+        <style>
+
+            .gold{
+                stroke:#D4AF37;
+                stroke-width:2;
+                stroke-linecap:round;
+                stroke-linejoin:round;
+                fill:none;
+            }
+
+            .thin{
+                stroke-width:1.5;
+            }
+
+            .medium{
+                stroke-width:2;
+            }
+
+        </style>
+
+    </defs>
+
+    <!-- OUTER RING -->
+
+    <circle
+        cx="500"
+        cy="500"
+        r="430"
+        class="gold"/>
+
+    <!-- MIDDLE RING -->
+
+    <circle
+        cx="500"
+        cy="500"
+        r="390"
+        class="gold thin"/>
+
+    <!-- INNER RING -->
+
+    <circle
+        cx="500"
+        cy="500"
+        r="350"
+        class="gold thin"/>
+
+    <!-- HORIZONTAL -->
+
+    <line
+        x1="150"
+        y1="500"
+        x2="850"
+        y2="500"
+        class="gold"/>
+
+    <!-- VERTICAL -->
+
+    <line
+        x1="500"
+        y1="150"
+        x2="500"
+        y2="850"
+        class="gold"/>
+
+    <!-- DIAGONAL -->
+
+    <line
+        x1="250"
+        y1="250"
+        x2="750"
+        y2="750"
+        class="gold thin"/>
+
+    <line
+        x1="750"
+        y1="250"
+        x2="250"
+        y2="750"
+        class="gold thin"/>
+
+    <!-- NORTH -->
+
+    <polygon
+        points="500,120 485,200 500,175 515,200"
+        fill="#D4AF37"/>
+
+    <!-- SOUTH -->
+
+    <polygon
+        points="500,880 485,800 500,825 515,800"
+        fill="#D4AF37"/>
+
+    <!-- EAST -->
+
+    <polygon
+        points="880,500 800,485 825,500 800,515"
+        fill="#D4AF37"/>
+
+    <!-- WEST -->
+
+    <polygon
+        points="120,500 200,485 175,500 200,515"
+        fill="#D4AF37"/>
+
+    <!-- DECISION NODES -->
+
+    <circle cx="500" cy="110" r="7" fill="#D4AF37"/>
+
+    <circle cx="890" cy="500" r="7" fill="#D4AF37"/>
+
+    <circle cx="500" cy="890" r="7" fill="#D4AF37"/>
+
+    <circle cx="110" cy="500" r="7" fill="#D4AF37"/>
+
+    <!-- CENTRE -->
+
+    <circle
+        cx="500"
+        cy="500"
+        r="90"
+        class="gold"/>
+
+    <circle
+        cx="500"
+        cy="500"
+        r="70"
+        class="gold thin"/>
+
+</svg>

@@ -1,0 +1,111 @@
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 1000 1000"
+    width="1000"
+    height="1000">
+
+    <defs>
+
+        <style>
+            .gold{
+                stroke:#D4AF37;
+                fill:none;
+                stroke-linecap:round;
+                stroke-linejoin:round;
+            }
+
+            .gold-fill{
+                fill:#D4AF37;
+            }
+
+            .thin{
+                stroke-width:2;
+            }
+
+            .medium{
+                stroke-width:4;
+            }
+
+            .bold{
+                stroke-width:8;
+            }
+        </style>
+
+    </defs>
+
+    <!-- OUTER RING -->
+
+    <circle
+        cx="500"
+        cy="500"
+        r="430"
+        class="gold medium"/>
+
+        <!-- ========================= -->
+<!-- COMPASS ROSE -->
+<!-- ========================= -->
+
+<g id="compass-rose" class="gold">
+
+  <!-- North -->
+  <polygon
+      points="500,140 485,430 500,390 515,430"
+      class="gold-fill"/>
+
+  <!-- South -->
+  <polygon
+      points="500,860 485,570 500,610 515,570"
+      class="gold-fill"/>
+
+  <!-- East -->
+  <polygon
+      points="860,500 570,485 610,500 570,515"
+      class="gold-fill"/>
+
+  <!-- West -->
+  <polygon
+      points="140,500 430,485 390,500 430,515"
+      class="gold-fill"/>
+
+</g>
+<!-- ========================= -->
+<!-- DIAGONAL POINTS -->
+<!-- ========================= -->
+
+<g id="diagonal-rose" class="gold">
+
+  <polygon
+      points="710,290 635,395 655,345 705,365"
+      class="gold-fill"/>
+
+  <polygon
+      points="290,290 365,395 345,345 295,365"
+      class="gold-fill"/>
+
+  <polygon
+      points="710,710 635,605 655,655 705,635"
+      class="gold-fill"/>
+
+  <polygon
+      points="290,710 365,605 345,655 295,635"
+      class="gold-fill"/>
+
+</g>
+
+    <!-- INNER RING -->
+
+    <circle
+        cx="500"
+        cy="500"
+        r="350"
+        class="gold thin"/>
+
+    <!-- CENTRE -->
+
+    <circle
+        cx="500"
+        cy="500"
+        r="90"
+        class="gold medium"/>
+
+</svg>
