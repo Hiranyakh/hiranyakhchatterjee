@@ -13,7 +13,7 @@ export const testimonials: Testimonial[] = [
     name: "Jaidip Dasgupta",
     role: "Entrepreneur",
     location: "Kolkata",
-    image: "/images/testimonials/amitava.jpg",
+    image: "/images/testimonials/Jaidip.jpg",
     quote:
       "Working with Hiranyakh completely changed the way I think about health, business and personal growth. His framework gave me clarity and confidence to make better decisions every day.",
   },
@@ -22,7 +22,7 @@ export const testimonials: Testimonial[] = [
     name: "Karishma Sanyal",
     role: "Business Professional",
     location: "Kolkata",
-    image: "/images/testimonials/soumyajit.jpg",
+    image: "/images/testimonials/Karishma.jpg",
     quote:
       "The Freedom Framework helped me simplify difficult decisions. Instead of feeling overwhelmed, I now have a clear direction for both my career and personal life.",
   },
@@ -31,7 +31,7 @@ export const testimonials: Testimonial[] = [
     name: "Arnab Das",
     role: "Business Sales Manager",
     location: "Kolkata",
-    image: "/images/testimonials/ipshita.jpg",
+    image: "/images/testimonials/arnab.jpg",
     quote:
       "The practical approach and structured guidance made a real difference. Every session gave me something I could immediately apply in my life and work.",
   },
