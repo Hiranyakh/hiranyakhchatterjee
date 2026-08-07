@@ -31,7 +31,7 @@ export const testimonials: Testimonial[] = [
     name: "Arnab Das",
     role: "Business Sales Manager",
     location: "Kolkata",
-    image: "/images/testimonials/arnab.jpg",
+    image: "/images/testimonials/Arnab.jpg",
     quote:
       "The practical approach and structured guidance made a real difference. Every session gave me something I could immediately apply in my life and work.",
   },
