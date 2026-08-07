@@ -1,62 +1,142 @@
 "use client";
 
-const labels = [
-  { title: "Health", top: "6%", left: "50%" },
-  { title: "Wealth", top: "30%", left: "92%" },
-  { title: "Growth", top: "78%", left: "86%" },
-  { title: "Purpose", top: "94%", left: "50%" },
-  { title: "Leadership", top: "78%", left: "10%" },
-];
+const LABELS = [
+  { title: "Health", angle: 0, position: "top" },
+  { title: "Wealth", angle: 72, position: "right-top" },
+  { title: "Growth", angle: 144, position: "right-bottom" },
+  { title: "Purpose", angle: 216, position: "bottom" },
+  { title: "Leadership", angle: 288, position: "left-top" },
+] as const;
+
+const SIZE = 560;
+const CENTER = SIZE / 2;
+
+// Marker sits just outside the outer bezel
+const MARKER_RADIUS = 286;
 
 export default function CompassLabels() {
   return (
     <>
-      {labels.map((label) => (
-        <div
-          key={label.title}
-          className="absolute -translate-x-1/2 -translate-y-1/2"
-          style={{
-            top: label.top,
-            left: label.left,
-          }}
-        >
-          <div className="flex flex-col items-center">
+      {LABELS.map((label) => {
+        const rad = ((label.angle - 90) * Math.PI) / 180;
 
-            {/* Connector Line */}
+        const x = CENTER + MARKER_RADIUS * Math.cos(rad);
+        const y = CENTER + MARKER_RADIUS * Math.sin(rad);
 
-            <div className="h-8 w-px bg-gradient-to-b from-[#D4AF37] to-transparent" />
+        let textStyle: React.CSSProperties = {};
+        let lineStyle: React.CSSProperties = {};
 
-            {/* Gold Marker */}
+        switch (label.position) {
+          case "top":
+            lineStyle = {
+              left: 0,
+              top: -28,
+              width: 1,
+              height: 24,
+            };
 
-            <div className="relative flex h-5 w-5 items-center justify-center rounded-full">
+            textStyle = {
+              left: 0,
+              top: -46,
+              transform: "translate(-50%, -100%)",
+            };
+            break;
 
-              <div className="absolute inset-0 rounded-full bg-[#D4AF37] shadow-[0_0_20px_rgba(212,175,55,.7)]" />
+          case "bottom":
+            lineStyle = {
+              left: 0,
+              top: 4,
+              width: 1,
+              height: 24,
+            };
 
-              <div className="h-2.5 w-2.5 rounded-full bg-[#FFF6D6]" />
+            textStyle = {
+              left: 0,
+              top: 40,
+              transform: "translate(-50%, 0)",
+            };
+            break;
 
+          case "right-top":
+            lineStyle = {
+              left: 4,
+              top: -2,
+              width: 26,
+              height: 1,
+            };
+
+            textStyle = {
+              left: 40,
+              top: -12,
+              transform: "translateY(-50%)",
+            };
+            break;
+
+          case "right-bottom":
+            lineStyle = {
+              left: 4,
+              top: 0,
+              width: 26,
+              height: 1,
+            };
+
+            textStyle = {
+              left: 40,
+              top: 12,
+              transform: "translateY(-50%)",
+            };
+            break;
+
+          case "left-top":
+            lineStyle = {
+              left: -30,
+              top: -2,
+              width: 26,
+              height: 1,
+            };
+
+            textStyle = {
+              right: 40,
+              top: -12,
+              transform: "translateY(-50%)",
+            };
+            break;
+        }
+
+        return (
+          <div
+            key={label.title}
+            className="absolute"
+            style={{
+              left: x,
+              top: y,
+              width: 0,
+              height: 0,
+            }}
+          >
+            {/* Connector */}
+            <div
+              className="absolute bg-[#D4AF37]/70"
+              style={lineStyle}
+            />
+
+            {/* Marker */}
+            <div
+              className="absolute h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#D4AF37] shadow-[0_0_18px_rgba(212,175,55,.65)]"
+            >
+              <div className="absolute inset-[5px] rounded-full bg-[#FFF8DC]" />
             </div>
 
-            {/* Label */}
-
-            <div className="mt-3">
-
-              <span
-                className="
-                  text-[13px]
-                  font-semibold
-                  uppercase
-                  tracking-[0.30em]
-                  text-[#F6E6A7]
-                "
-              >
-                {label.title}
-              </span>
-
+            {/* Text */}
+            <div
+              className="absolute whitespace-nowrap text-[13px] font-semibold uppercase tracking-[0.30em] text-[#F2F0EA]"
+              style={textStyle}
+            >
+              {label.title}
             </div>
-
           </div>
-        </div>
-      ))}
+        );
+      })}
     </>
   );
 }

@@ -35,22 +35,45 @@ export default function CompassCenter() {
           shadow-[0_0_45px_rgba(212,175,55,.35)]
         "
       >
+        {/* Center Jewel */}
+<div className="absolute flex items-center justify-center">
+  <div className="h-8 w-8 rounded-full bg-[#D4AF37] shadow-lg flex items-center justify-center">
+    <div className="h-5 w-5 rounded-full bg-[#FFF8DC]" />
+    <div className="absolute h-1.5 w-1.5 -translate-x-1 -translate-y-1 rounded-full bg-white opacity-90" />
+  </div>
+</div>
         {/* Inner Ivory Ring */}
         <div className="relative h-full w-full overflow-hidden rounded-full bg-[#F8F6F1]">
 
-          {/* Glass Reflection */}
-          <div
-            className="
-              absolute
-              inset-0
-              rounded-full
-              bg-gradient-to-br
-              from-white/35
-              via-transparent
-              to-transparent
-              pointer-events-none
-            "
-          />
+          {/* Animated Glass Reflection */}
+<motion.div
+  className="absolute inset-0 overflow-hidden rounded-full pointer-events-none"
+>
+  <motion.div
+    animate={{
+      x: ["-180%", "180%"],
+    }}
+    transition={{
+      duration: 8,
+      repeat: Infinity,
+      ease: "easeInOut",
+      repeatDelay: 3,
+    }}
+    className="
+      absolute
+      -left-1/2
+      top-0
+      h-full
+      w-1/3
+      rotate-12
+      bg-gradient-to-r
+      from-transparent
+      via-white/25
+      to-transparent
+      blur-xl
+    "
+  />
+</motion.div>
 
           {/* Portrait */}
           <Image
@@ -61,6 +84,15 @@ export default function CompassCenter() {
             sizes="280px"
             className="object-cover object-top"
           />
+          <div
+  className="
+    absolute
+    inset-0
+    rounded-full
+    shadow-[inset_0_0_45px_rgba(0,0,0,.28)]
+    pointer-events-none
+  "
+/>
         </div>
       </div>
     </motion.div>

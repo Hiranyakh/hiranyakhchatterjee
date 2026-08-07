@@ -1,39 +1,36 @@
 "use client";
 
-import CompassRing from "./CompassRing";
+import FloatingParticles from "./FloatingParticles";
+import CompassGlow from "./CompassGlow";
+import CompassTicks from "./CompassTicks";
+import CompassBezel from "./CompassBezel";
+import CompassGeometry from "./CompassGeometry";
+import CompassNeedle from "./CompassNeedle";
 import CompassCenter from "./CompassCenter";
 import CompassLabels from "./CompassLabels";
-import CompassGlow from "./CompassGlow";
-import FloatingParticles from "./FloatingParticles";
-
-interface Props {
-  image: string;
-}
-
-export default function FreedomCompass({
-  image,
-}: Props) {
+import FreedomPulse from "@/components/ui/freedom/FreedomPulse";
+export default function FreedomCompass() {
   return (
-    <div className="relative flex items-center justify-center w-[620px] h-[620px]">
+    <div className="relative flex h-[560px] w-[560px] items-center justify-center">
 
-      {/* Background Particles */}
-
+      {/* Floating Particles */}
       <FloatingParticles />
 
-      {/* Glow */}
-
+      {/* Ambient Glow */}
       <CompassGlow />
 
-      {/* Compass Ring */}
+            {/* Compass Body */}
+      <CompassBezel>
+        <CompassGeometry />
+        <CompassNeedle />
+        {/* Tick Ring */}
+      <CompassTicks />
+      </CompassBezel>
 
-      <CompassRing />
-
-      {/* Labels */}
-
+      {/* Freedom Pillars */}
       <CompassLabels />
-
-      {/* Center */}
-
+      <FreedomPulse />
+      {/* Portrait */}
       <CompassCenter />
 
     </div>

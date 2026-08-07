@@ -1,9 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { ReactNode } from "react";
+import { COMPASS } from "@/components/ui/freedom/compassGeometry";
 
 interface CompassBezelProps {
-  children?: React.ReactNode;
+  children: ReactNode;
 }
 
 export default function CompassBezel({
@@ -17,48 +19,52 @@ export default function CompassBezel({
         repeat: Infinity,
         ease: "linear",
       }}
-      className="relative flex h-[560px] w-[560px] items-center justify-center rounded-full"
+      className="relative flex items-center justify-center rounded-full"
+      style={{
+        width: COMPASS.SIZE,
+        height: COMPASS.SIZE,
+      }}
     >
-      {/* Ambient Gold Glow */}
-      <div className="absolute inset-[-40px] rounded-full bg-[#D4AF37]/10 blur-[80px]" />
-
-      {/* Outer Metallic Ring */}
+      {/* Outer Metal Ring */}
       <div
         className="
-          absolute
-          inset-0
-          rounded-full
-          bg-[linear-gradient(145deg,#6E5310_0%,#B88A16_15%,#F6E6A7_35%,#FFF7D0_50%,#D4AF37_65%,#9A7315_85%,#6E5310_100%)]
-          shadow-[0_15px_45px_rgba(0,0,0,.55),0_0_60px_rgba(212,175,55,.28)]
+          absolute inset-0 rounded-full
+          bg-[linear-gradient(145deg,#6E5310_0%,#A97C12_15%,#F8E6A4_34%,#FFF8D5_50%,#D4AF37_67%,#9C7414_84%,#6E5310_100%)]
+          shadow-[0_18px_40px_rgba(0,0,0,.55),0_0_45px_rgba(212,175,55,.28)]
         "
       />
 
-      {/* Bevel Highlight */}
+      {/* Top Highlight */}
       <div
         className="
-          absolute
-          inset-[5px]
-          rounded-full
-          bg-[linear-gradient(135deg,rgba(255,255,255,.45),transparent_28%,transparent_72%,rgba(0,0,0,.22))]
+          absolute inset-[4px] rounded-full
+          bg-[linear-gradient(135deg,rgba(255,255,255,.45),transparent_30%,transparent_70%,rgba(0,0,0,.25))]
         "
       />
 
-      {/* Inner Dark Face */}
+      {/* Dark Face */}
       <div
-        className="
-          absolute
-          inset-[16px]
-          rounded-full
-          bg-[#0E1522]
-          shadow-inner
-        "
+        className="absolute rounded-full bg-[#0B1220] shadow-inner"
+        style={{
+          inset: COMPASS.OUTER_RADIUS - COMPASS.FACE_RADIUS,
+        }}
       />
 
-      {/* Decorative Gold Ring */}
-      <div className="absolute inset-[28px] rounded-full border border-[#F6E6A7]/35" />
+      {/* Decorative Ring 1 */}
+      <div
+        className="absolute rounded-full border border-[#F6E6A7]/35"
+        style={{
+          inset: COMPASS.OUTER_RADIUS - COMPASS.RING1_RADIUS,
+        }}
+      />
 
-      {/* Fine Inner Ring */}
-      <div className="absolute inset-[44px] rounded-full border border-[#D4AF37]/15" />
+      {/* Decorative Ring 2 */}
+      <div
+        className="absolute rounded-full border border-[#D4AF37]/18"
+        style={{
+          inset: COMPASS.OUTER_RADIUS - COMPASS.RING2_RADIUS,
+        }}
+      />
 
       {children}
     </motion.div>
