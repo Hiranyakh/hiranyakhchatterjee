@@ -1,26 +1,32 @@
 "use client";
 
+import { COMPASS } from "@/components/ui/freedom/compassGeometry";
+
 export default function CompassGeometry() {
+  const center = COMPASS.CENTER;
+
+  const innerRingRadius = 155;
+  const centerRingRadius = 120;
+
+  const axisStart = 70;
+  const axisEnd = 490;
+
+  const diagonalStart = 130;
+  const diagonalEnd = 430;
+
+  const cardinalRadius = 185;
+
   return (
     <svg
-      viewBox="0 0 540 540"
+      viewBox={`0 0 ${COMPASS.SIZE} ${COMPASS.SIZE}`}
       className="absolute inset-0 h-full w-full"
+      preserveAspectRatio="xMidYMid meet"
     >
-      {/* Outer Ring */}
-      <circle
-        cx="270"
-        cy="270"
-        r="175"
-        fill="none"
-        stroke="rgba(212,175,55,.25)"
-        strokeWidth="1.5"
-      />
-
       {/* Inner Ring */}
       <circle
-        cx="270"
-        cy="270"
-        r="155"
+        cx={center}
+        cy={center}
+        r={innerRingRadius}
         fill="none"
         stroke="rgba(212,175,55,.18)"
         strokeWidth="1"
@@ -28,105 +34,94 @@ export default function CompassGeometry() {
 
       {/* Center Ring */}
       <circle
-        cx="270"
-        cy="270"
-        r="120"
+        cx={center}
+        cy={center}
+        r={centerRingRadius}
         fill="none"
         stroke="rgba(212,175,55,.15)"
         strokeWidth="1"
       />
 
-      {/* Main Axis */}
+      {/* Main Vertical Axis */}
       <line
-        x1="270"
-        y1="70"
-        x2="270"
-        y2="470"
+        x1={center}
+        y1={axisStart}
+        x2={center}
+        y2={axisEnd}
         stroke="rgba(212,175,55,.25)"
       />
 
+      {/* Main Horizontal Axis */}
       <line
-        x1="70"
-        y1="270"
-        x2="470"
-        y2="270"
+        x1={axisStart}
+        y1={center}
+        x2={axisEnd}
+        y2={center}
         stroke="rgba(212,175,55,.25)"
       />
 
-      {/* Diagonals */}
+      {/* Diagonal */}
       <line
-        x1="130"
-        y1="130"
-        x2="410"
-        y2="410"
+        x1={diagonalStart}
+        y1={diagonalStart}
+        x2={diagonalEnd}
+        y2={diagonalEnd}
         stroke="rgba(212,175,55,.12)"
       />
 
+      {/* Diagonal */}
       <line
-        x1="410"
-        y1="130"
-        x2="130"
-        y2="410"
+        x1={diagonalEnd}
+        y1={diagonalStart}
+        x2={diagonalStart}
+        y2={diagonalEnd}
         stroke="rgba(212,175,55,.12)"
       />
 
       {/* Cardinal Dots */}
-      <circle cx="270" cy="85" r="4" fill="#D4AF37"/>
-      <circle cx="455" cy="270" r="4" fill="#D4AF37"/>
-      <circle cx="270" cy="455" r="4" fill="#D4AF37"/>
-      <circle cx="85" cy="270" r="4" fill="#D4AF37"/>
+      <circle
+        cx={center}
+        cy={center - cardinalRadius}
+        r="4"
+        fill="#D4AF37"
+      />
+
+      <circle
+        cx={center + cardinalRadius}
+        cy={center}
+        r="4"
+        fill="#D4AF37"
+      />
+
+      <circle
+        cx={center}
+        cy={center + cardinalRadius}
+        r="4"
+        fill="#D4AF37"
+      />
+
+      <circle
+        cx={center - cardinalRadius}
+        cy={center}
+        r="4"
+        fill="#D4AF37"
+      />
 
       {/* Center Hub */}
       <circle
-        cx="270"
-        cy="270"
+        cx={center}
+        cy={center}
         r="10"
         fill="#D4AF37"
       />
 
       <circle
-        cx="270"
-        cy="270"
+        cx={center}
+        cy={center}
         r="20"
         fill="none"
         stroke="rgba(212,175,55,.35)"
       />
-      {/* Engraved Tick Marks */}
-
-{Array.from({ length: 60 }).map((_, i) => {
-  const angle = (i * 360) / 60;
-  const isMajor = i % 5 === 0;
-
-  const inner = isMajor ? 248 : 253;
-const outer = 266;
-
-  const x1 =
-    270 + inner * Math.cos((angle - 90) * Math.PI / 180);
-
-  const y1 =
-    270 + inner * Math.sin((angle - 90) * Math.PI / 180);
-
-  const x2 =
-    270 + outer * Math.cos((angle - 90) * Math.PI / 180);
-
-  const y2 =
-    270 + outer * Math.sin((angle - 90) * Math.PI / 180);
-
-  return (
-    <line
-      key={i}
-      x1={x1}
-      y1={y1}
-      x2={x2}
-      y2={y2}
-      stroke="rgba(246,230,167,.65)"
-      strokeWidth={isMajor ? 2 : 1}
-      strokeLinecap="round"
-    />
-  );
-})}
-
-
     </svg>
   );
 }

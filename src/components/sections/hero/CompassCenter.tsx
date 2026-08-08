@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { COMPASS } from "@/components/ui/freedom/compassGeometry";
 
 export default function CompassCenter() {
   return (
@@ -12,18 +13,17 @@ export default function CompassCenter() {
         repeat: Infinity,
         ease: "easeInOut",
       }}
-      className="absolute z-30 flex items-center justify-center"
+      className="absolute inset-0 z-30 flex items-center justify-center"
+      style={{
+        width: COMPASS.SIZE,
+        height: COMPASS.SIZE,
+      }}
     >
-      {/* Shadow */}
-      <div className="absolute h-[300px] w-[300px] translate-y-6 rounded-full bg-black/30 blur-2xl" />
-
       {/* Gold Medallion */}
       <div
         className="
           relative
           flex
-          h-[280px]
-          w-[280px]
           items-center
           justify-center
           rounded-full
@@ -34,66 +34,69 @@ export default function CompassCenter() {
           p-[10px]
           shadow-[0_0_45px_rgba(212,175,55,.35)]
         "
+        style={{
+          width: COMPASS.PORTRAIT_SIZE,
+          height: COMPASS.PORTRAIT_SIZE,
+        }}
       >
-        {/* Center Jewel */}
-<div className="absolute flex items-center justify-center">
-  <div className="h-8 w-8 rounded-full bg-[#D4AF37] shadow-lg flex items-center justify-center">
-    <div className="h-5 w-5 rounded-full bg-[#FFF8DC]" />
-    <div className="absolute h-1.5 w-1.5 -translate-x-1 -translate-y-1 rounded-full bg-white opacity-90" />
-  </div>
-</div>
-        {/* Inner Ivory Ring */}
-        <div className="relative h-full w-full overflow-hidden rounded-full bg-[#F8F6F1]">
+        {/* Animated Glass Reflection */}
+        <motion.div
+          className="
+            pointer-events-none
+            absolute
+            inset-0
+            overflow-hidden
+            rounded-full
+          "
+        >
+          <motion.div
+            animate={{
+              x: ["-180%", "180%"],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut",
+              repeatDelay: 3,
+            }}
+            className="
+              absolute
+              -left-1/2
+              top-0
+              h-full
+              w-1/3
+              rotate-12
+              bg-gradient-to-r
+              from-transparent
+              via-white/25
+              to-transparent
+              blur-xl
+            "
+          />
+        </motion.div>
 
-          {/* Animated Glass Reflection */}
-<motion.div
-  className="absolute inset-0 overflow-hidden rounded-full pointer-events-none"
->
-  <motion.div
-    animate={{
-      x: ["-180%", "180%"],
-    }}
-    transition={{
-      duration: 8,
-      repeat: Infinity,
-      ease: "easeInOut",
-      repeatDelay: 3,
-    }}
-    className="
-      absolute
-      -left-1/2
-      top-0
-      h-full
-      w-1/3
-      rotate-12
-      bg-gradient-to-r
-      from-transparent
-      via-white/25
-      to-transparent
-      blur-xl
-    "
-  />
-</motion.div>
-
-          {/* Portrait */}
+        {/* Portrait */}
+        <div className="relative h-full w-full overflow-hidden rounded-full">
           <Image
             src="/images/hero-portrait.png"
             alt="Hiranyakh"
             fill
             priority
-            sizes="280px"
+            sizes={`${COMPASS.PORTRAIT_SIZE}px`}
             className="object-cover object-top"
           />
-          <div
-  className="
-    absolute
-    inset-0
-    rounded-full
-    shadow-[inset_0_0_45px_rgba(0,0,0,.28)]
-    pointer-events-none
-  "
-/>
         </div>
+
+        {/* Inner Glass / Shadow */}
+        <div
+          className="
+            pointer-events-none
+            absolute
+            inset-0
+            rounded-full
+            shadow-[inset_0_0_45px_rgba(0,0,0,.28)]
+          "
+        />
       </div>
     </motion.div>
   );

@@ -1,8 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { COMPASS } from "@/components/ui/freedom/compassGeometry";
 
 export default function CompassNeedle() {
+  const center = COMPASS.CENTER;
+
+  // Keep the needle slightly inside the compass face.
+  const needleTip = 70;
+  const needleBottom = 490;
+
   return (
     <motion.div
       animate={{
@@ -14,37 +21,74 @@ export default function CompassNeedle() {
         ease: "easeInOut",
       }}
       className="absolute inset-0 z-40 flex items-center justify-center"
+      style={{
+        width: COMPASS.SIZE,
+        height: COMPASS.SIZE,
+      }}
     >
       <svg
-        width="560"
-        height="560"
-        viewBox="0 0 560 560"
-        className="overflow-visible"
+        viewBox={`0 0 ${COMPASS.SIZE} ${COMPASS.SIZE}`}
+        className="absolute inset-0 h-full w-full"
+        preserveAspectRatio="xMidYMid meet"
       >
         <defs>
-          {/* Gold */}
-          <linearGradient id="goldNeedle" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#FFF9D6" />
-            <stop offset="30%" stopColor="#F6D978" />
-            <stop offset="65%" stopColor="#D4AF37" />
-            <stop offset="100%" stopColor="#8B6914" />
+          {/* Gold Needle */}
+          <linearGradient
+            id="goldNeedle"
+            x1="0"
+            y1="0"
+            x2="0"
+            y2="1"
+          >
+            <stop offset="0%" stopColor="#FFF8D5" />
+            <stop offset="35%" stopColor="#D4AF37" />
+            <stop offset="70%" stopColor="#A97C12" />
+            <stop offset="100%" stopColor="#6E5310" />
           </linearGradient>
 
           {/* Graphite */}
-          <linearGradient id="blackNeedle" x1="0" y1="0" x2="0" y2="1">
+          <linearGradient
+            id="blackNeedle"
+            x1="0"
+            y1="0"
+            x2="0"
+            y2="1"
+          >
             <stop offset="0%" stopColor="#6B7280" />
             <stop offset="50%" stopColor="#374151" />
             <stop offset="100%" stopColor="#111827" />
           </linearGradient>
 
           {/* Metal Shine */}
-          <linearGradient id="shine" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="rgba(255,255,255,0)" />
-            <stop offset="50%" stopColor="rgba(255,255,255,.55)" />
-            <stop offset="100%" stopColor="rgba(255,255,255,0)" />
+          <linearGradient
+            id="shine"
+            x1="0"
+            y1="0"
+            x2="1"
+            y2="0"
+          >
+            <stop
+              offset="0%"
+              stopColor="rgba(255,255,255,0)"
+            />
+            <stop
+              offset="50%"
+              stopColor="rgba(255,255,255,.55)"
+            />
+            <stop
+              offset="100%"
+              stopColor="rgba(255,255,255,0)"
+            />
           </linearGradient>
 
-          <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+          {/* Needle Shadow */}
+          <filter
+            id="shadow"
+            x="-50%"
+            y="-50%"
+            width="200%"
+            height="200%"
+          >
             <feDropShadow
               dx="0"
               dy="3"
@@ -54,38 +98,49 @@ export default function CompassNeedle() {
           </filter>
         </defs>
 
-        {/* NORTH */}
+        {/* NORTH — Gold */}
         <polygon
-          points="280,70 292,280 280,300 268,280"
+          points={`
+            ${center},${needleTip}
+            ${center + 12},${center}
+            ${center},${center + 20}
+            ${center - 12},${center}
+          `}
           fill="url(#goldNeedle)"
           filter="url(#shadow)"
         />
 
-        {/* SOUTH */}
+        {/* SOUTH — Graphite */}
         <polygon
-          points="280,490 292,280 280,260 268,280"
+          points={`
+            ${center},${needleBottom}
+            ${center + 12},${center}
+            ${center},${center - 20}
+            ${center - 12},${center}
+          `}
           fill="url(#blackNeedle)"
           filter="url(#shadow)"
         />
 
         {/* Center Disc */}
         <circle
-          cx="280"
-          cy="280"
+          cx={center}
+          cy={center}
           r="18"
           fill="#D4AF37"
         />
 
         <circle
-          cx="280"
-          cy="280"
+          cx={center}
+          cy={center}
           r="12"
           fill="#FFF8DC"
         />
 
+        {/* Center Highlight */}
         <circle
-          cx="276"
-          cy="276"
+          cx={center - 4}
+          cy={center - 4}
           r="3"
           fill="white"
           opacity="0.9"

@@ -1,10 +1,10 @@
 import Container from "@/components/ui/Container";
-
+import FreedomCompass from "./FreedomCompass";
 import HeroBadge from "./HeroBadge";
 import HeroHeading from "./HeroHeading";
 import HeroDescription from "./HeroDescription";
 import HeroActions from "./HeroActions";
-import HeroPortrait from "./HeroPortrait";
+
 
 export default function Hero() {
   return (
@@ -21,7 +21,9 @@ export default function Hero() {
             <HeroActions />
           </div>
 
-          <HeroPortrait />
+          <div className="relative flex items-center justify-center">
+  <FreedomCompass />
+</div>
         </div>
       </Container>
     </section>
