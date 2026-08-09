@@ -1,4 +1,5 @@
 "use client";
+
 import { motion } from "framer-motion";
 
 export default function HeroHeading() {
@@ -8,12 +9,14 @@ export default function HeroHeading() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2 }}
     >
-      <h1 className="mt-8 text-5xl font-bold leading-[1.05] text-slate-950 lg:text-8xl">
-        Build a Better Future.
-      </h1>
+      <p className="text-sm font-semibold uppercase tracking-[0.28em] text-[#0F7A5C]">
+        Build a Better Future
+      </p>
 
-      <h2 className="mt-3 text-5xl font-bold leading-[1.05] text-emerald-700 lg:text-8xl">
-        One Decision at a Time.
+      <h2 className="mt-3 text-5xl font-bold leading-[1.05] text-slate-900 sm:text-6xl lg:text-8xl">
+        One Decision
+        <br />
+        <span className="text-[#0F7A5C]">at a Time.</span>
       </h2>
     </motion.div>
   );

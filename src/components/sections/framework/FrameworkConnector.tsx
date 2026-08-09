@@ -4,33 +4,54 @@ import { motion } from "framer-motion";
 
 interface FrameworkConnectorProps {
   active?: boolean;
+  horizontal?: boolean;
 }
 
 export default function FrameworkConnector({
   active = true,
+  horizontal = false,
 }: FrameworkConnectorProps) {
-  return (
-    <div className="relative flex justify-center py-2">
-
+  if (horizontal) {
+    return (
       <motion.div
-        initial={{ height: 0 }}
-        whileInView={{ height: 90 }}
+        initial={{ scaleX: 0, opacity: 0 }}
+        whileInView={{ scaleX: 1, opacity: 1 }}
         viewport={{ once: true }}
         transition={{
           duration: 0.8,
           ease: "easeOut",
         }}
-        className={`
-          w-[3px]
-          rounded-full
-          ${
+        className="origin-left"
+      >
+        <div
+          className={`h-[3px] w-full rounded-full ${
             active
-              ? "bg-gradient-to-b from-[#D4AF37] via-[#0F7A5C] to-[#D4AF37]"
+              ? "bg-gradient-to-r from-[#D4AF37] via-[#0F7A5C] to-[#D4AF37]"
               : "bg-slate-200"
-          }
-        `}
-      />
+          }`}
+        />
+      </motion.div>
+    );
+  }
 
-    </div>
+  return (
+    <motion.div
+      initial={{ scaleY: 0, opacity: 0 }}
+      whileInView={{ scaleY: 1, opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{
+        duration: 0.8,
+        ease: "easeOut",
+      }}
+      className="origin-top"
+    >
+      <div
+        className={`h-[90px] w-[3px] rounded-full ${
+          active
+            ? "bg-gradient-to-b from-[#D4AF37] via-[#0F7A5C] to-[#D4AF37]"
+            : "bg-slate-200"
+        }`}
+      />
+    </motion.div>
   );
 }

@@ -15,103 +15,139 @@ export default function FrameworkStage({
   description,
 }: FrameworkStageProps) {
   const [expanded, setExpanded] = useState(false);
+
   return (
     <motion.div
-      whileHover={{
-        y: -6,
-        scale: 1.02,
-      }}
-      transition={{
-        duration: 0.3,
-      }}
-      className="group relative"
+      whileHover={{ y: -5 }}
+      transition={{ duration: 0.3 }}
+      className="group relative flex w-full flex-col items-center text-center"
     >
-      <div
+      {/* Number */}
+      <motion.div
+        whileHover={{ scale: 1.08 }}
+        transition={{ duration: 0.25 }}
         className="
-        rounded-[28px]
-        border
-        border-[#D4AF37]/20
-        bg-white/70
-        backdrop-blur-xl
-        p-10
-        shadow-[0_20px_60px_rgba(15,23,42,0.08)]
-        transition-all
-        duration-500
-        group-hover:border-[#D4AF37]/50
-        group-hover:shadow-[0_30px_80px_rgba(15,23,42,0.12)]
-      "
+          relative
+          flex
+          h-[68px]
+          w-[68px]
+          items-center
+          justify-center
+          rounded-full
+          border-2
+          border-[#D4AF37]
+          bg-[#FAF9F6]
+          text-[17px]
+          font-bold
+          text-[#D4AF37]
+          shadow-[0_8px_28px_rgba(212,175,55,.16)]
+        "
       >
-        <div className="flex items-center gap-5">
+        <div className="absolute inset-[4px] rounded-full border border-[#D4AF37]/20" />
 
-          <div
-            className="
-            flex
-            h-14
-            w-14
-            items-center
-            justify-center
-            rounded-full
-            border
-            border-[#D4AF37]
-            bg-[#FAF9F6]
-            text-lg
+        <span className="relative">{step}</span>
+      </motion.div>
+
+      {/* Content */}
+      <div className="mt-6 px-2">
+        <h3
+          className="
+            text-[20px]
             font-bold
-            text-[#D4AF37]
+            tracking-tight
+            text-slate-900
+            md:text-[22px]
           "
+        >
+          {title}
+        </h3>
+
+        <p
+          className="
+            mx-auto
+            mt-3
+            max-w-[220px]
+            text-[13px]
+            leading-6
+            text-slate-600
+          "
+        >
+          {description}
+        </p>
+      </div>
+
+      {/* Gold Accent */}
+      <div className="mt-5 h-[2px] w-14 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent" />
+
+      {/* Explore */}
+      <button
+        type="button"
+        onClick={() => setExpanded((value) => !value)}
+        className="
+          mt-4
+          text-[10px]
+          font-semibold
+          uppercase
+          tracking-[0.20em]
+          text-[#0F7A5C]
+          transition-all
+          duration-200
+          hover:tracking-[0.25em]
+        "
+      >
+        {expanded ? "Show Less ↑" : "Explore Stage →"}
+      </button>
+
+      {/* Expanded Content */}
+      <AnimatePresence initial={false}>
+        {expanded && (
+          <motion.div
+            initial={{
+              opacity: 0,
+              height: 0,
+              y: -8,
+            }}
+            animate={{
+              opacity: 1,
+              height: "auto",
+              y: 0,
+            }}
+            exit={{
+              opacity: 0,
+              height: 0,
+              y: -8,
+            }}
+            transition={{
+              duration: 0.35,
+              ease: "easeOut",
+            }}
+            className="w-full overflow-hidden"
           >
-            {step}
-          </div>
-
-          <div>
-            <h3 className="text-2xl font-bold text-slate-900">
-              {title}
-            </h3>
-
-            <p className="mt-2 max-w-xl text-slate-600 leading-7">
-              {description}
-            </p>
-          </div>
-
-        </div>
-
-        <div className="mt-8 h-[2px] w-24 bg-gradient-to-r from-[#D4AF37] to-transparent" />
-
-       <button
-  onClick={() => setExpanded(!expanded)}
-  className="
-    mt-8
-    text-sm
-    font-semibold
-    tracking-wide
-    text-[#0F7A5C]
-    transition-all
-    hover:translate-x-1
-  "
->
-  {expanded ? "Show Less ↑" : "Explore Stage →"}
-</button>
-<AnimatePresence>
-  {expanded && (
-    <motion.div
-      initial={{ opacity: 0, height: 0 }}
-      animate={{ opacity: 1, height: "auto" }}
-      exit={{ opacity: 0, height: 0 }}
-      transition={{ duration: 0.35 }}
-      className="overflow-hidden"
-    >
-      <div className="mt-6 border-t border-slate-200 pt-6">
-        <ul className="space-y-3 text-slate-600">
-          <li>✓ Ask Better Questions</li>
-          <li>✓ Learn Continuously</li>
-          <li>✓ Challenge Assumptions</li>
-          <li>✓ Build Mental Clarity</li>
-        </ul>
-      </div>
-    </motion.div>
-  )}
-</AnimatePresence>
-
-      </div>
+            <div
+              className="
+                mx-auto
+                mt-5
+                max-w-[230px]
+                rounded-xl
+                border
+                border-slate-200
+                bg-white
+                px-4
+                py-4
+                text-left
+                shadow-[0_8px_24px_rgba(15,23,42,.06)]
+              "
+            >
+              <ul className="space-y-2 text-xs leading-5 text-slate-600">
+                <li>✓ Ask Better Questions</li>
+                <li>✓ Learn Continuously</li>
+                <li>✓ Challenge Assumptions</li>
+                <li>✓ Build Mental Clarity</li>
+              </ul>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }

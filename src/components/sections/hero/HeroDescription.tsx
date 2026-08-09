@@ -1,4 +1,5 @@
 "use client";
+
 import { motion } from "framer-motion";
 
 export default function HeroDescription() {
@@ -7,11 +8,20 @@ export default function HeroDescription() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0.4 }}
-      className="mt-8 max-w-xl text-xl leading-9 text-slate-600"
+      className="
+        mt-7
+        max-w-xl
+        text-lg
+        leading-8
+        text-slate-600
+        sm:text-xl
+        sm:leading-9
+      "
     >
-      Helping people think better, decide better and build a better
-      life through practical frameworks, intentional decisions,
-      and continuous growth.
+      Helping professionals and entrepreneurs optimize their{" "}
+      <span className="font-semibold text-slate-800">health</span>, build{" "}
+      <span className="font-semibold text-slate-800">wealth</span>, and create
+      meaningful <span className="font-semibold text-slate-800">growth</span>.
     </motion.p>
   );
 }

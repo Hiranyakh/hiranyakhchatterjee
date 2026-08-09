@@ -5,13 +5,28 @@ import HeroHeading from "./HeroHeading";
 import HeroDescription from "./HeroDescription";
 import HeroActions from "./HeroActions";
 
-
 export default function Hero() {
   return (
-    <section className="overflow-hidden bg-background py-40">
+    <section className="relative overflow-hidden">
       <Container>
-        <div className="grid items-center gap-12 lg:grid-cols-[44%_56%]">
-          <div>
+        <div
+          className="
+            grid
+            min-h-[calc(100vh-88px)]
+            grid-cols-1
+            items-center
+            gap-10
+            py-12
+            lg:grid-cols-[0.9fr_1.1fr]
+            lg:gap-4
+            lg:py-16
+          "
+        >
+          {/* ========================= */}
+          {/* HERO CONTENT */}
+          {/* ========================= */}
+
+          <div className="relative z-10 flex flex-col items-center text-center lg:items-start lg:text-left">
             <HeroBadge />
 
             <HeroHeading />
@@ -21,23 +36,46 @@ export default function Hero() {
             <HeroActions />
           </div>
 
-          <div className="relative flex items-center justify-center">
-  <FreedomCompass />
-</div>
+          {/* ========================= */}
+          {/* FREEDOM COMPASS */}
+          {/* ========================= */}
+
+          <div
+            className="
+              relative
+              z-10
+              flex
+              min-h-[360px]
+              items-center
+              justify-center
+              overflow-visible
+              lg:min-h-[580px]
+            "
+          >
+            {/* Desktop Compass */}
+            <div className="hidden lg:flex items-center justify-center">
+              <FreedomCompass />
+            </div>
+
+            {/* Mobile Compass */}
+            <div
+              className="
+                flex
+                h-[360px]
+                w-[360px]
+                items-center
+                justify-center
+                overflow-visible
+                lg:hidden
+              "
+            >
+              <div className="scale-[0.62]">
+                <FreedomCompass />
+              </div>
+            </div>
+          </div>
         </div>
       </Container>
     </section>
   );
 }
-<div className="absolute bottom-0 left-0 w-full overflow-hidden">
-  <svg
-    viewBox="0 0 1440 120"
-    className="w-full text-white"
-    preserveAspectRatio="none"
-  >
-    <path
-      fill="currentColor"
-      d="M0,32L120,48C240,64,480,96,720,96C960,96,1200,64,1320,48L1440,32V120H0Z"
-    />
-  </svg>
-</div>
