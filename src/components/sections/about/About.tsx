@@ -1,68 +1,128 @@
 "use client";
 
-import Image from "next/image";
 import ProfileFrame from "./ProfileFrame";
 import Section from "@/components/ui/Section";
-
 import StoryCard from "./StoryCard";
 import JourneyTimeline from "./JourneyTimeline";
 
 export default function About() {
   return (
-    <Section >
+    <Section className="overflow-hidden">
+      <div
+        className="
+          grid
+          grid-cols-1
+          items-center
+          gap-12
+          lg:grid-cols-[1.05fr_0.95fr]
+          lg:gap-16
+          xl:gap-24
+        "
+      >
+        {/* ========================= */}
+        {/* LEFT — STORY */}
+        {/* ========================= */}
 
-      <div className="grid items-center gap-20 lg:grid-cols-2">
-
-        {/* LEFT */}
-
-        <div>
-
-          <span className="inline-flex rounded-full bg-emerald-50 px-4 py-2 text-sm font-semibold text-[#0F7A5C]">
+        <div className="min-w-0">
+          {/* Section Label */}
+          <span
+            className="
+              inline-flex
+              rounded-full
+              bg-emerald-50
+              px-4
+              py-2
+              text-xs
+              font-semibold
+              uppercase
+              tracking-[0.18em]
+              text-[#0F7A5C]
+              sm:text-sm
+            "
+          >
             ABOUT
           </span>
 
-          <h2 className="mt-6 text-5xl font-bold leading-tight text-slate-900">
-            My Journey Didn't Change My Career.
+          {/* Heading */}
+          <h2
+            className="
+              mt-5
+              max-w-3xl
+              text-4xl
+              font-bold
+              leading-[1.08]
+              tracking-tight
+              text-slate-900
+              sm:text-5xl
+              lg:text-6xl
+            "
+          >
+            My Journey Didn&apos;t Change My Career.
             <br />
-            It Changed My Mission.
+            <span className="text-[#0F7A5C]">
+              It Changed My Mission.
+            </span>
           </h2>
 
-          <p className="mt-6 text-lg leading-8 text-slate-600">
-            I began my professional journey as an Electronics & Telecommunication Engineer.
-            Over time, personal experiences reshaped my perspective on health, purpose,
-            and the impact of better decisions. That journey led me into clinical nutrition,
-            AI, entrepreneurship, and ultimately to creating The HIRANYAKH Compass™—
-            a framework designed to help people think better, decide better, and build better lives.
+          {/* Story */}
+          <p
+            className="
+              mt-6
+              max-w-2xl
+              text-base
+              leading-7
+              text-slate-600
+              sm:text-lg
+              sm:leading-8
+            "
+          >
+            I began my professional journey as an Electronics &amp;
+            Telecommunication Engineer. Over time, personal experiences
+            reshaped my perspective on health, purpose, and the impact of
+            better decisions. That journey led me into clinical nutrition,
+            AI, entrepreneurship, and ultimately to creating The HIRANYAKH
+            Compass™—a framework designed to help people think better, decide
+            better, and build better lives.
           </p>
 
-          <div className="mt-12">
+          {/* Journey */}
+          <div className="mt-9 sm:mt-12">
             <JourneyTimeline />
           </div>
-
         </div>
 
-        {/* RIGHT */}
+        {/* ========================= */}
+        {/* RIGHT — PROFILE */}
+        {/* ========================= */}
 
-        <div className="space-y-6">
-
-          <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-lg">
-
+        <div
+          className="
+            flex
+            w-full
+            flex-col
+            items-center
+            gap-5
+            lg:items-center
+            lg:gap-4
+          "
+        >
+          {/* Portrait */}
+          <div className="w-full max-w-[380px]">
             <ProfileFrame
-  src="/images/about-portrait.png"
-  alt="Hiranyakh"
-/>
-
+              src="/images/about-portrait.png"
+              alt="Hiranyakh"
+            />
           </div>
 
-          <StoryCard
-            title="Purpose Beyond Profession"
-            description="Today my mission is to help individuals create healthier lives, stronger careers, smarter businesses, and greater freedom by making better decisions every day."
-          />
-
+          {/* Purpose Card */}
+          <div className="w-full max-w-[380px]">
+            <StoryCard
+              title="Purpose Beyond Profession"
+              description="Today my mission is to help individuals create healthier lives, stronger careers, smarter businesses, and greater freedom by making better decisions every day."
+            />
+          </div>
         </div>
-
       </div>
-
     </Section>
   );
 }

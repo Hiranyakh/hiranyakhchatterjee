@@ -16,53 +16,55 @@ export default function ProfileFrame({
     <motion.div
       whileHover={{
         y: -6,
-        scale: 1.02,
+        scale: 1.015,
       }}
-      transition={{
-        duration: 0.35,
-      }}
-      className="relative flex justify-center"
+      transition={{ duration: 0.35 }}
+      className="relative flex w-full justify-center"
     >
-      {/* Soft Glow */}
-
+      {/* Soft Gold Glow */}
       <div
         className="
           absolute
-          inset-6
+          inset-4
           rounded-[36px]
           bg-[#D4AF37]/15
           blur-3xl
+          sm:inset-6
         "
       />
 
       {/* Outer Gold Frame */}
-
       <div
         className="
           relative
-          rounded-[36px]
+          w-full
+          max-w-[340px]
+          rounded-[32px]
           border-[3px]
           border-[#D4AF37]
           bg-gradient-to-b
           from-[#FFFDF7]
           to-[#F7F3E8]
-          p-3
+          p-2.5
           shadow-[0_25px_60px_rgba(15,23,42,0.15)]
+          sm:rounded-[36px]
+          sm:p-3
         "
       >
-        {/* Navy Accent */}
-
+        {/* Inner Frame */}
         <div
           className="
-            rounded-[28px]
+            overflow-hidden
+            rounded-[24px]
             border
             border-slate-200
             bg-white
-            p-3
+            p-2.5
+            sm:rounded-[28px]
+            sm:p-3
           "
         >
           {/* Portrait */}
-
           <Image
             src={src}
             alt={alt}
@@ -70,8 +72,8 @@ export default function ProfileFrame({
             height={560}
             priority
             className="
-              w-[280px]
-              lg:w-[340px]
+              h-auto
+              w-full
               object-contain
             "
           />
