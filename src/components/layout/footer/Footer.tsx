@@ -8,17 +8,14 @@ import Container from "@/components/ui/Container";
 export default function Footer() {
   return (
     <footer className="bg-[#0B132B] text-white">
-
       <Container>
-
-        <div className="border-t border-white/10 py-20">
+        <div className="border-t border-white/10 py-14 sm:py-20">
 
           {/* ============================ */}
-          {/* Logo */}
+          {/* Brand */}
           {/* ============================ */}
 
           <div className="flex flex-col items-center text-center">
-
             <Image
               src="/brand/compass-watermark.svg"
               alt="HIRANYAKH"
@@ -27,80 +24,154 @@ export default function Footer() {
               className="opacity-90"
             />
 
-            <h2 className="mt-6 text-3xl font-bold tracking-wide">
+            <h2 className="mt-5 text-2xl font-bold tracking-wide sm:text-3xl">
               HIRANYAKH
             </h2>
 
-            <p className="mt-3 text-slate-400 tracking-[0.25em] uppercase text-xs">
-              Think Better • Decide Better • Build Better
-            </p>
-
+            <p
+  className="
+    mt-3
+    whitespace-nowrap
+    text-[9px]
+    uppercase
+    tracking-[0.12em]
+    text-slate-400
+    sm:text-xs
+    sm:tracking-[0.22em]
+  "
+>
+  Think Better • Decide Better • Build Better
+</p>
           </div>
 
           {/* ============================ */}
           {/* Navigation */}
           {/* ============================ */}
 
-          <div className="mt-14 flex flex-wrap justify-center gap-8 text-sm">
-
-            <Link href="/framework" className="hover:text-[#D4AF37] transition">
+          <nav
+            className="
+              mx-auto
+              mt-10
+              flex
+              max-w-xl
+              flex-wrap
+              justify-center
+              gap-x-6
+              gap-y-4
+              text-sm
+              text-slate-300
+              sm:mt-14
+              sm:gap-x-8
+            "
+          >
+            <Link
+              href="/framework"
+              className="transition hover:text-[#D4AF37]"
+            >
               Framework
             </Link>
 
-            <Link href="/freedom-score" className="hover:text-[#D4AF37] transition">
+            <Link
+              href="/freedom-score"
+              className="transition hover:text-[#D4AF37]"
+            >
               Freedom Score™
             </Link>
 
-            <Link href="/resources" className="hover:text-[#D4AF37] transition">
+            <Link
+              href="/resources"
+              className="transition hover:text-[#D4AF37]"
+            >
               Resources
             </Link>
 
-            <Link href="/about" className="hover:text-[#D4AF37] transition">
+            <Link
+              href="/about"
+              className="transition hover:text-[#D4AF37]"
+            >
               About
             </Link>
 
-            <Link href="/contact" className="hover:text-[#D4AF37] transition">
+            <Link
+              href="/contact"
+              className="transition hover:text-[#D4AF37]"
+            >
               Contact
             </Link>
-
-          </div>
+          </nav>
 
           {/* ============================ */}
           {/* Social */}
           {/* ============================ */}
 
-          <div className="mt-12 flex justify-center gap-8 text-sm text-slate-400">
-
-            <a href="#" className="hover:text-white transition">
+          <div
+            className="
+              mt-9
+              flex
+              flex-wrap
+              justify-center
+              gap-x-6
+              gap-y-3
+              text-sm
+              text-slate-400
+              sm:mt-12
+              sm:gap-8
+            "
+          >
+            <a
+              href="#"
+              className="transition hover:text-white"
+            >
               LinkedIn
             </a>
 
-            <a href="#" className="hover:text-white transition">
+            <a
+              href="#"
+              className="transition hover:text-white"
+            >
               Facebook
             </a>
 
-            <a href="#" className="hover:text-white transition">
+            <a
+              href="#"
+              className="transition hover:text-white"
+            >
               Instagram
             </a>
 
-            <a href="#" className="hover:text-white transition">
+            <a
+              href="#"
+              className="transition hover:text-white"
+            >
               YouTube
             </a>
-
           </div>
 
           {/* ============================ */}
           {/* Divider */}
           {/* ============================ */}
 
-          <div className="py=20" />
+          <div className="my-10 h-px bg-white/10 sm:my-14" />
 
           {/* ============================ */}
           {/* Bottom */}
           {/* ============================ */}
 
-          <div className="flex flex-col items-center justify-between gap-6 text-center text-sm text-slate-400 lg:flex-row">
-
+          <div
+            className="
+              flex
+              flex-col
+              items-center
+              justify-between
+              gap-3
+              text-center
+              text-xs
+              text-slate-500
+              sm:text-sm
+              lg:flex-row
+              lg:text-left
+            "
+          >
             <p>
               © 2026 HIRANYAKH. All Rights Reserved.
             </p>
@@ -108,13 +179,9 @@ export default function Footer() {
             <p className="text-[#D4AF37]">
               Built with Purpose.
             </p>
-
           </div>
-
         </div>
-
       </Container>
-
     </footer>
   );
 }
