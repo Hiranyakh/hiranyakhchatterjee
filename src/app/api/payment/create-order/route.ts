@@ -6,14 +6,24 @@ export async function POST() {
     const keySecret = process.env.RAZORPAY_KEY_SECRET;
 
     if (!keyId || !keySecret) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: "Razorpay credentials are not configured.",
-        },
-        { status: 500 }
-      );
-    }
+  console.error("Razorpay environment check:", {
+    keyIdPresent: Boolean(keyId),
+    keySecretPresent: Boolean(keySecret),
+    nodeEnv: process.env.NODE_ENV,
+  });
+
+  return NextResponse.json(
+    {
+      success: false,
+      error: "Razorpay credentials are not configured.",
+      debug: {
+        keyIdPresent: Boolean(keyId),
+        keySecretPresent: Boolean(keySecret),
+      },
+    },
+    { status: 500 }
+  );
+}
 
     const amount = 29900; // ₹299 in paise
 
