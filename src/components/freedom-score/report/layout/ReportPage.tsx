@@ -14,24 +14,60 @@ export default function ReportPage({
   children,
 }: ReportPageProps) {
   return (
-    <div className="mx-auto max-w-5xl rounded-3xl bg-white p-10 shadow-xl">
-      <header className="mb-10 border-b border-slate-200 pb-6">
-        <h1 className="text-4xl font-bold text-slate-900">
+    <section className="report-page">
+
+      {/* Report Header */}
+      <header className="report-page-header">
+
+        <div>
+          <p className="report-brand">
+            THE HIRANYAKH FRAMEWORK™
+          </p>
+
+          <p className="report-brand-subtitle">
+            Freedom Score™ Executive Report
+          </p>
+        </div>
+
+        <div className="report-confidential">
+          CONFIDENTIAL
+        </div>
+
+      </header>
+
+      {/* Page Title */}
+      <div className="report-title-block">
+
+        <h1>
           {title}
         </h1>
 
         {subtitle && (
-          <p className="mt-2 text-lg text-slate-600">
+          <p>
             {subtitle}
           </p>
         )}
-      </header>
 
-      <main>{children}</main>
+      </div>
 
-      <footer className="mt-12 border-t border-slate-200 pt-6 text-center text-sm text-slate-500">
-        © {new Date().getFullYear()} Freedom Score™ Executive Report
+      {/* Page Content */}
+      <main className="report-content">
+        {children}
+      </main>
+
+      {/* Footer */}
+      <footer className="report-footer">
+
+        <span>
+          © {new Date().getFullYear()} Freedom Score™
+        </span>
+
+        <span>
+          Personal Freedom Assessment
+        </span>
+
       </footer>
-    </div>
+
+    </section>
   );
 }

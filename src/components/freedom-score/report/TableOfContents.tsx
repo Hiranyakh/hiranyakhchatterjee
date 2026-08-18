@@ -1,7 +1,9 @@
 "use client";
 
-import ReportPage from "./layout/ReportPage";
-import { BookOpen, ChevronRight } from "lucide-react";
+import {
+  BookOpen,
+  ChevronRight,
+} from "lucide-react";
 
 interface Section {
   title: string;
@@ -92,97 +94,141 @@ const sections: Section[] = [
 
 export default function TableOfContents() {
   return (
-    <ReportPage
-      title="Table of Contents"
-      subtitle="Your personalized Freedom Blueprint™ Executive Edition"
-    >
-      <div className="space-y-8">
+    <section className="report-page">
 
-        <div className="flex items-center gap-4 rounded-2xl bg-slate-100 p-6">
+      {/* HEADER */}
+      <header className="report-page-header">
+
+        <div>
+          <p className="report-brand">
+            THE HIRANYAKH FRAMEWORK™
+          </p>
+
+          <p className="report-brand-subtitle">
+            Freedom Score™ Executive Report
+          </p>
+        </div>
+
+        <div className="report-confidential">
+          CONFIDENTIAL
+        </div>
+
+      </header>
+
+      {/* TITLE */}
+      <div className="report-title-block">
+
+        <h1>
+          Table of Contents
+        </h1>
+
+        <p>
+          Your personalized Freedom Blueprint™ Executive Edition
+        </p>
+
+      </div>
+
+      {/* INTRO */}
+      <div className="print-avoid-break flex items-center gap-4 rounded-[18px] bg-slate-100 p-5">
+
+        <div className="rounded-xl bg-white p-3 shadow-sm">
 
           <BookOpen
-            size={36}
+            size={22}
             className="text-blue-700"
           />
 
-          <div>
-
-            <h2 className="text-2xl font-bold">
-              Report Structure
-            </h2>
-
-            <p className="mt-2 text-slate-600">
-              This report has been organized to guide you
-              through your current position, strengths,
-              opportunities and a practical roadmap toward
-              greater freedom.
-            </p>
-
-          </div>
-
         </div>
 
-        <div className="rounded-3xl border border-slate-200 overflow-hidden">
+        <div>
 
-          {sections.map((section, index) => (
-            <div
-              key={section.title}
-              className={`flex items-center justify-between p-6 ${
-                index !== sections.length - 1
-                  ? "border-b border-slate-200"
-                  : ""
-              }`}
-            >
-              <div className="flex items-start gap-4">
+          <h2 className="text-[16px] font-bold text-slate-900">
+            Report Structure
+          </h2>
 
-                <div className="mt-1">
-                  <ChevronRight
-                    size={20}
-                    className="text-blue-700"
-                  />
-                </div>
-
-                <div>
-
-                  <h3 className="text-xl font-bold text-slate-900">
-                    {section.title}
-                  </h3>
-
-                  <p className="mt-2 text-slate-600 leading-7">
-                    {section.description}
-                  </p>
-
-                </div>
-
-              </div>
-
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-lg font-bold text-white">
-                {section.page}
-              </div>
-
-            </div>
-          ))}
-
-        </div>
-
-        <div className="rounded-2xl border-l-4 border-amber-500 bg-amber-50 p-6">
-
-          <h3 className="font-bold text-amber-800">
-            How to Use This Report
-          </h3>
-
-          <p className="mt-3 leading-7 text-slate-700">
-            Read the report from beginning to end before
-            implementing recommendations. Focus first on
-            the lowest-scoring pillar, then use the
-            90-Day Freedom Roadmap to create measurable
-            progress. Revisit this assessment every
-            90–180 days to track your improvement.
+          <p className="mt-1 text-[10px] leading-4 text-slate-600">
+            A structured journey through your current position,
+            strengths, opportunities and strategic roadmap toward
+            greater freedom.
           </p>
 
         </div>
 
       </div>
-    </ReportPage>
+
+      {/* CONTENT LIST */}
+      <div className="mt-5 overflow-hidden rounded-[18px] border border-slate-200">
+
+        {sections.map((section, index) => (
+          <div
+            key={section.title}
+            className={`flex items-center justify-between px-5 py-[9px] ${
+              index !== sections.length - 1
+                ? "border-b border-slate-200"
+                : ""
+            }`}
+          >
+
+            <div className="flex min-w-0 items-start gap-3">
+
+              <ChevronRight
+                size={14}
+                className="mt-1 shrink-0 text-blue-600"
+              />
+
+              <div className="min-w-0">
+
+                <h3 className="text-[11px] font-bold leading-4 text-slate-900">
+                  {section.title}
+                </h3>
+
+                <p className="mt-0.5 text-[8px] leading-3 text-slate-500">
+                  {section.description}
+                </p>
+
+              </div>
+
+            </div>
+
+            <div className="ml-4 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-600 text-[9px] font-bold text-white">
+              {section.page}
+            </div>
+
+          </div>
+        ))}
+
+      </div>
+
+      {/* HOW TO USE */}
+      <div className="print-avoid-break mt-5 rounded-[18px] border-l-4 border-amber-500 bg-amber-50 p-5">
+
+        <h3 className="text-[11px] font-bold text-amber-800">
+          How to Use This Report
+        </h3>
+
+        <p className="mt-2 text-[9px] leading-4 text-slate-700">
+          Read the report from beginning to end before implementing
+          recommendations. Focus first on the lowest-scoring pillar,
+          then use the 90-Day Freedom Roadmap to create measurable
+          progress. Revisit the assessment every 90–180 days to
+          track improvement.
+        </p>
+
+      </div>
+
+      {/* FOOTER */}
+      <footer className="report-footer">
+
+        <span>
+          © {new Date().getFullYear()} Freedom Score™
+        </span>
+
+        <span>
+          Personal Freedom Assessment
+        </span>
+
+      </footer>
+
+    </section>
   );
 }

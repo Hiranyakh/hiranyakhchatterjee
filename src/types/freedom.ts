@@ -5,12 +5,28 @@ export type Pillar =
   | "leadership"
   | "purpose";
 
+export type QuestionType =
+  | "frequency"
+  | "clarity"
+  | "confidence"
+  | "maturity"
+  | "consistency"
+  | "diversification"
+  | "alignment";
+
+export interface QuestionOption {
+  label: string;
+  value: number;
+}
+
 export interface Question {
   id: number;
   pillar: Pillar;
   question: string;
   description?: string;
   weight: number;
+  type: QuestionType;
+  options: QuestionOption[];
 }
 
 export interface Answer {
@@ -26,6 +42,7 @@ export interface PillarScore {
 export interface FreedomResult {
   overallScore: number;
   pillarScores: PillarScore[];
+  answers: Answer[];
 }
 
 export interface FreedomLevel {
@@ -40,12 +57,8 @@ export interface ExecutiveSummary {
 
 export interface FreedomReport {
   overallScore: number;
-
   level: FreedomLevel;
-
   profile: string;
-
   executiveSummary: ExecutiveSummary;
-
   pillars: PillarScore[];
 }

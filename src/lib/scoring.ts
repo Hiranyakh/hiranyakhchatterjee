@@ -24,24 +24,43 @@ export function calculateFreedomScore(
     );
 
     const totalPossible = pillarQuestions.reduce(
-      (sum, q) => sum + q.weight * 5,
+      (sum, question) => {
+        const maxValue = Math.max(
+          ...question.options.map(
+            (option) => option.value
+          )
+        );
+
+        return (
+          sum +
+          question.weight * maxValue
+        );
+      },
       0
     );
 
-    const earned = pillarQuestions.reduce((sum, question) => {
-      const answer = answers.find(
-        (a) => a.questionId === question.id
-      );
+    const earned = pillarQuestions.reduce(
+      (sum, question) => {
+        const answer = answers.find(
+          (a) => a.questionId === question.id
+        );
 
-      if (!answer) return sum;
+        if (!answer) return sum;
 
-      return sum + answer.value * question.weight;
-    }, 0);
+        return (
+          sum +
+          answer.value * question.weight
+        );
+      },
+      0
+    );
 
     const score =
       totalPossible === 0
         ? 0
-        : Math.round((earned / totalPossible) * 100);
+        : Math.round(
+            (earned / totalPossible) * 100
+          );
 
     return {
       pillar,
@@ -50,12 +69,15 @@ export function calculateFreedomScore(
   });
 
   const overallScore = Math.round(
-    pillarScores.reduce((sum, p) => sum + p.score, 0) /
-      pillarScores.length
+    pillarScores.reduce(
+      (sum, pillar) => sum + pillar.score,
+      0
+    ) / pillarScores.length
   );
 
   return {
     overallScore,
     pillarScores,
+    answers,
   };
 }

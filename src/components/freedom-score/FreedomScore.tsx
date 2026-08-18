@@ -169,6 +169,8 @@ export default function FreedomScore() {
       return (
         <ResultsScreen
           result={result}
+           assessmentId={assessmentId}
+           personalInfo={personalInfo!}
         />
       );
 
