@@ -5,6 +5,12 @@ export async function POST() {
     const keyId = process.env.RAZORPAY_KEY_ID;
     const keySecret = process.env.RAZORPAY_KEY_SECRET;
 
+console.log("RAZORPAY ENV CHECK:", {
+  keyIdPresent: Boolean(keyId),
+  keySecretPresent: Boolean(keySecret),
+  nodeEnv: process.env.NODE_ENV,
+});
+
     if (!keyId || !keySecret) {
   console.error("Razorpay environment check:", {
     keyIdPresent: Boolean(keyId),
