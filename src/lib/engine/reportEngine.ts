@@ -19,6 +19,9 @@ import { generateBlueprint } from "@/lib/blueprint";
 import { generateExecutiveInsight } from "@/lib/insights";
 import { detectProfile } from "./profileEngine";
 import { pillarConfig } from "@/lib/pillarConfig";
+import {
+  getConsultationRecommendations,
+} from "./recommendationEngine";
 
 export interface FreedomReport {
   overallScore: number;
@@ -86,6 +89,10 @@ export interface FreedomReport {
     typeof generateBlueprint
   >;
 
+   recommendations: ReturnType<
+  typeof getConsultationRecommendations
+>;
+
   pillars: {
     pillar: Pillar;
     label: string;
@@ -134,6 +141,12 @@ export function buildFreedomReport(
 
   const executiveSummary =
     generateExecutiveInsight(result);
+
+  const recommendations =
+    getConsultationRecommendations(
+      result.pillarScores,
+      result.overallScore
+    );
 
   // =========================
   // HEALTH ANALYSIS
@@ -347,6 +360,8 @@ level,
     executiveSummary,
 
     blueprint,
+ 
+    recommendations,
 
     pillars,
   };

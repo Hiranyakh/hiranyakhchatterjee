@@ -14,6 +14,7 @@ import BlueprintCard from "./BlueprintCard";
 import ExecutiveSummary from "./ExecutiveSummary";
 
 import DownloadFreedomPDF from "./pdf/DownloadFreedomPDF";
+import ConsultationRecommendationCard from "./ConsultationRecommendationCard";
 
 interface Props {
   result: FreedomResult;
@@ -271,6 +272,13 @@ export default function ResultsScreen({
         <ExecutiveSummary
           insight={report.executiveSummary}
         />
+
+	{/* Recommended Consultation */}
+{report.recommendations?.[0] && (
+  <ConsultationRecommendationCard
+    recommendation={report.recommendations[0]}
+  />
+)}
 
         {/* Freedom Radar */}
         <RadarChart report={report} />
