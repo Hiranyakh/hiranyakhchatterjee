@@ -63,7 +63,15 @@ export default function Footer() {
               sm:mt-14
               sm:gap-x-8
             "
+		
           >
+		<Link
+  href="/"
+  className="transition hover:text-[#D4AF37]"
+>
+  Home
+</Link>
+
             <Link
               href="/framework"
               className="transition hover:text-[#D4AF37]"
