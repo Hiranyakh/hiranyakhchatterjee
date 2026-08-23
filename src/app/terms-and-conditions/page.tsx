@@ -1,7 +1,18 @@
+import Link from "next/link";
 export default function TermsAndConditionsPage() {
   return (
     <main className="min-h-screen bg-slate-50 px-6 py-16">
       <div className="mx-auto max-w-4xl rounded-3xl bg-white p-8 shadow-xl md:p-12">
+	
+	<div className="mx-auto mb-6 max-w-4xl">
+  <Link
+    href="/"
+    className="inline-flex items-center text-sm font-semibold text-slate-600 transition hover:text-amber-600"
+  >
+    ← Back to Home
+  </Link>
+</div>
+
         <div className="mb-10 border-b border-slate-200 pb-8">
           <p className="text-sm font-bold uppercase tracking-[0.25em] text-amber-600">
             Hiranyakh Chatterjee
