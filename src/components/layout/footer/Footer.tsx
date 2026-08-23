@@ -157,29 +157,50 @@ export default function Footer() {
           {/* Bottom */}
           {/* ============================ */}
 
-          <div
-            className="
-              flex
-              flex-col
-              items-center
-              justify-between
-              gap-3
-              text-center
-              text-xs
-              text-slate-500
-              sm:text-sm
-              lg:flex-row
-              lg:text-left
-            "
-          >
-            <p>
-              © 2026 HIRANYAKH. All Rights Reserved.
-            </p>
+	<div
+  className="
+    flex
+    flex-col
+    items-center
+    justify-between
+    gap-5
+    text-center
+    text-xs
+    text-slate-500
+    sm:text-sm
+    lg:flex-row
+    lg:text-left
+  "
+>
+  <p>
+    © 2026 HIRANYAKH. All Rights Reserved.
+  </p>
 
-            <p className="text-[#D4AF37]">
-              Built with Purpose.
-            </p>
-          </div>
+  <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+    <Link
+      href="/privacy-policy"
+      className="transition hover:text-[#D4AF37]"
+    >
+      Privacy Policy
+    </Link>
+
+    <Link
+      href="/terms-and-conditions"
+      className="transition hover:text-[#D4AF37]"
+    >
+      Terms & Conditions
+    </Link>
+
+    <span className="hidden text-slate-700 sm:inline">
+      |
+    </span>
+
+    <p className="text-[#D4AF37]">
+      Built with Purpose.
+    </p>
+  </div>
+</div>          
+
         </div>
       </Container>
     </footer>
