@@ -90,6 +90,19 @@ export default function FreedomScore() {
 
       setResult(finalResult);
 
+      // Persist the completed assessment without blocking the results screen.
+      fetch("/api/assessment/complete", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          assessmentId,
+          answers: updatedAnswers,
+          result: finalResult,
+        }),
+      }).catch((error) => {
+        console.error("Unable to persist Freedom Score result:", error);
+      });
+
       setStep("results");
 
       return;

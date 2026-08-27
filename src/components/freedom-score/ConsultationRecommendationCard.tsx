@@ -37,9 +37,9 @@ export default function ConsultationRecommendationCard({
     useState("");
 
   const [bookingStep, setBookingStep] =
-    useState<"payment" | "booking" | "confirmed">(
-      "payment"
-    );
+  useState<"payment" | "booking" | "confirmed">(
+    "payment"
+  );
 
   const [selectedDate, setSelectedDate] =
     useState("");
@@ -408,11 +408,11 @@ setSlots(normalizedSlots as Slot[]);
       setBookingLoading(true);
       setBookingError("");
 
-      if (!bookingToken) {
-        throw new Error(
-          "Your payment authorization is missing. Please restart the payment."
-        );
-      }
+ if (!bookingToken) {
+  throw new Error(
+    "Your payment authorization is missing. Please complete the consultation payment first."
+  );
+}
 
       if (!selectedSlot) {
         throw new Error(
@@ -749,12 +749,11 @@ setSlots(normalizedSlots as Slot[]);
             </p>
 
             <p className="mt-2 text-sm leading-6 text-green-700">
-              Your payment has been verified and
-              your consultation has been scheduled.
-              Please check your email for the
-              booking confirmation and meeting
-              details.
-            </p>
+  Your consultation has been scheduled
+  successfully.
+  Please check your email for the booking
+  confirmation and meeting details.
+</p>
           </div>
         )}
 

@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import crypto from "crypto";
 
+import { eventConfig } from "@/lib/eventConfig";
+
 const EVENT_TYPE_IDS: Record<string, number> = {
   health: 6751336,
   wealth: 6751406,
@@ -9,9 +11,7 @@ const EVENT_TYPE_IDS: Record<string, number> = {
   leadership: 6751502,
 };
 
-function verifyBookingToken(
-  token: string
-) {
+function verifyBookingToken(token: string) {
   try {
     const parts = token.split(".");
 
@@ -19,43 +19,32 @@ function verifyBookingToken(
       return null;
     }
 
-    const [
-      encodedPayload,
-      receivedSignature,
-    ] = parts;
+    const [encodedPayload, receivedSignature] = parts;
 
-    const secret =
-      process.env.RAZORPAY_KEY_SECRET;
+    const secret = process.env.RAZORPAY_KEY_SECRET;
 
     if (!secret) {
       return null;
     }
 
-    const expectedSignature =
-      crypto
-        .createHmac("sha256", secret)
-        .update(encodedPayload)
-        .digest("base64url");
+    const expectedSignature = crypto
+      .createHmac("sha256", secret)
+      .update(encodedPayload)
+      .digest("base64url");
 
-    const expected =
-      Buffer.from(
-        expectedSignature,
-        "utf8"
-      );
+    const expected = Buffer.from(
+      expectedSignature,
+      "utf8"
+    );
 
-    const received =
-      Buffer.from(
-        receivedSignature,
-        "utf8"
-      );
+    const received = Buffer.from(
+      receivedSignature,
+      "utf8"
+    );
 
     if (
-      expected.length !==
-        received.length ||
-      !crypto.timingSafeEqual(
-        expected,
-        received
-      )
+      expected.length !== received.length ||
+      !crypto.timingSafeEqual(expected, received)
     ) {
       return null;
     }
@@ -80,19 +69,15 @@ function verifyBookingToken(
   }
 }
 
-export async function POST(
-  request: Request
-) {
+export async function POST(request: Request) {
   try {
-    const apiKey =
-      process.env.CAL_API_KEY;
+    const apiKey = process.env.CAL_API_KEY;
 
     if (!apiKey) {
       return NextResponse.json(
         {
           success: false,
-          error:
-            "CAL_API_KEY is not configured.",
+          error: "CAL_API_KEY is not configured.",
         },
         { status: 500 }
       );
@@ -109,8 +94,12 @@ export async function POST(
       timeZone,
     } = body;
 
+    // -----------------------------------------
+    // BASIC REQUEST VALIDATION
+    // -----------------------------------------
+
     if (
-      !bookingToken ||
+      (!bookingToken && eventConfig.paymentRequired) ||
       !eventTypeId ||
       !start ||
       !name ||
@@ -120,40 +109,50 @@ export async function POST(
         {
           success: false,
           error:
-            "Booking token, event type, start time, name and email are required.",
+            "Booking details are incomplete.",
         },
         { status: 400 }
       );
     }
 
     // -----------------------------------------
-    // VERIFY PAYMENT AUTHORIZATION TOKEN
+    // PAYMENT AUTHORIZATION
     // -----------------------------------------
 
-    const tokenPayload =
-      verifyBookingToken(
+    let tokenPayload: any = null;
+
+    if (eventConfig.paymentRequired) {
+      tokenPayload = verifyBookingToken(
         bookingToken
       );
 
-    if (!tokenPayload) {
-      return NextResponse.json(
-        {
-          success: false,
-          error:
-            "Invalid or expired booking authorization.",
-        },
-        { status: 403 }
-      );
+      if (!tokenPayload) {
+        return NextResponse.json(
+          {
+            success: false,
+            error:
+              "Invalid or expired booking authorization.",
+          },
+          { status: 403 }
+        );
+      }
     }
 
     // -----------------------------------------
     // VERIFY EVENT TYPE
     // -----------------------------------------
 
+    const consultationType =
+      tokenPayload?.consultationType ||
+      Object.entries(EVENT_TYPE_IDS).find(
+        ([, id]) =>
+          Number(eventTypeId) === id
+      )?.[0];
+
     const expectedEventTypeId =
-      EVENT_TYPE_IDS[
-        tokenPayload.consultationType
-      ];
+      consultationType
+        ? EVENT_TYPE_IDS[consultationType]
+        : undefined;
 
     if (
       !expectedEventTypeId ||
@@ -182,8 +181,7 @@ export async function POST(
         headers: {
           Authorization: `Bearer ${apiKey}`,
           "Content-Type": "application/json",
-          "cal-api-version":
-            "2024-08-13",
+          "cal-api-version": "2024-08-13",
         },
 
         body: JSON.stringify({
@@ -196,27 +194,27 @@ export async function POST(
             name,
             email,
             timeZone:
-              timeZone ||
-              "Asia/Kolkata",
+              timeZone || "Asia/Kolkata",
             language: "en",
           },
 
           metadata: {
             source:
               "hiranyakhchatterjee.com",
-            consultationType:
-              tokenPayload.consultationType,
+
+            consultationType,
+
             razorpayPaymentId:
-              tokenPayload.paymentId,
+              tokenPayload?.paymentId || null,
+
             razorpayOrderId:
-              tokenPayload.orderId,
+              tokenPayload?.orderId || null,
           },
         }),
       }
     );
 
-    const data =
-      await response.json();
+    const data = await response.json();
 
     if (!response.ok) {
       console.error(

@@ -14,7 +14,6 @@ import {
 } from "lucide-react";
 
 import { PersonalInfo } from "@/types/assessment";
-import { generateAssessmentId } from "@/lib/generateAssessmentId";
 
 interface Props {
   onContinue: (
@@ -93,12 +92,44 @@ export default function AssessmentRegistration({
     return Object.keys(newErrors).length === 0;
   }
 
-  function handleContinue() {
+  async function handleContinue() {
     if (!validate()) return;
 
-    const id = generateAssessmentId();
+    try {
+      const params = new URLSearchParams(window.location.search);
 
-    onContinue(id, form);
+      const attribution = {
+        utm_source: params.get("utm_source"),
+        utm_medium: params.get("utm_medium"),
+        utm_campaign: params.get("utm_campaign"),
+        utm_content: params.get("utm_content"),
+        utm_term: params.get("utm_term"),
+      };
+
+      const response = await fetch("/api/assessment/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          personalInfo: form,
+          attribution,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || "Unable to save registration.");
+      }
+
+      onContinue(data.assessmentId, form);
+    } catch (error) {
+      setErrors({
+        email:
+          error instanceof Error
+            ? error.message
+            : "Unable to save registration. Please try again.",
+      });
+    }
   }
 
   return (

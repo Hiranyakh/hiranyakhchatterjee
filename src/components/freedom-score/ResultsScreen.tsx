@@ -4,6 +4,10 @@ import { FreedomResult } from "@/types/freedom";
 import { PersonalInfo } from "@/types/assessment";
 import Script from "next/script";
 import { buildFreedomReport } from "@/lib/engine/reportEngine";
+import {
+  consultationConfig,
+  ConsultationType,
+} from "@/lib/consultationConfig";
 
 import RadarChart from "./RadarChart";
 import ReportHeader from "./ReportHeader";
