@@ -14,6 +14,28 @@ export default function MasterclassPage() {
   const [registered, setRegistered] = useState(false);
   const [error, setError] = useState("");
 
+  // -----------------------------------------
+  // META COOKIE HELPER
+  // -----------------------------------------
+
+  function getMetaCookie(name: string) {
+    if (typeof document === "undefined") {
+      return null;
+    }
+
+    const match = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith(`${name}=`));
+
+    return match
+      ? decodeURIComponent(match.substring(name.length + 1))
+      : null;
+  }
+
+  // -----------------------------------------
+  // FORM SUBMISSION
+  // -----------------------------------------
+
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
@@ -21,6 +43,17 @@ export default function MasterclassPage() {
     setError("");
 
     try {
+      // -----------------------------------------
+      // META ATTRIBUTION
+      // -----------------------------------------
+
+      const fbp = getMetaCookie("_fbp");
+      const fbc = getMetaCookie("_fbc");
+
+      // -----------------------------------------
+      // REGISTER MASTERCLASS LEAD
+      // -----------------------------------------
+
       const response = await fetch("/api/masterclass/register", {
         method: "POST",
         headers: {
@@ -30,6 +63,13 @@ export default function MasterclassPage() {
           fullName: form.fullName,
           email: form.email,
           phone: form.phone,
+
+          // Meta attribution
+          fbp,
+          fbc,
+
+          // Page where registration happened
+          eventSourceUrl: window.location.href,
         }),
       });
 
@@ -40,6 +80,26 @@ export default function MasterclassPage() {
           data?.error || "Unable to complete registration."
         );
       }
+
+// Fire the browser-side Meta Lead event
+// using the same event ID sent through CAPI.
+if (
+  typeof window !== "undefined" &&
+  typeof window.fbq === "function" &&
+  data.metaEventId
+) {
+  window.fbq(
+    "track",
+    "Lead",
+    {
+      content_name:
+        "AI Powered Side Hustle Masterclass",
+    },
+    {
+      eventID: data.metaEventId,
+    }
+  );
+}
 
       setRegistered(true);
     } catch (err) {
@@ -52,6 +112,10 @@ export default function MasterclassPage() {
       setLoading(false);
     }
   }
+
+  // -----------------------------------------
+  // SUCCESS / BOOKING SCREEN
+  // -----------------------------------------
 
   if (registered) {
     return (
@@ -106,6 +170,10 @@ export default function MasterclassPage() {
     );
   }
 
+  // -----------------------------------------
+  // MASTERCLASS LANDING PAGE
+  // -----------------------------------------
+
   return (
     <main className="min-h-screen bg-slate-950 text-white">
       {/* HERO + VIDEO */}
@@ -113,6 +181,7 @@ export default function MasterclassPage() {
       <section className="px-4 pb-12 pt-6 md:px-6 md:pb-20 md:pt-12">
         <div className="mx-auto max-w-6xl">
           <div className="grid items-center gap-10 md:grid-cols-2 md:gap-14">
+
             {/* VIDEO */}
 
             <div>
@@ -174,6 +243,7 @@ export default function MasterclassPage() {
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </section>
@@ -199,6 +269,9 @@ export default function MasterclassPage() {
 
           <div className="mt-10 rounded-3xl border border-slate-200 bg-white p-6 shadow-xl md:p-9">
             <form onSubmit={handleSubmit} className="space-y-5">
+
+              {/* FULL NAME */}
+
               <div>
                 <label
                   htmlFor="fullName"
@@ -224,6 +297,8 @@ export default function MasterclassPage() {
                 />
               </div>
 
+              {/* EMAIL */}
+
               <div>
                 <label
                   htmlFor="email"
@@ -248,6 +323,8 @@ export default function MasterclassPage() {
                   className="w-full rounded-xl border border-slate-300 px-4 py-3.5 outline-none transition focus:border-slate-900 focus:ring-2 focus:ring-slate-200"
                 />
               </div>
+
+              {/* PHONE */}
 
               <div>
                 <label
@@ -275,11 +352,15 @@ export default function MasterclassPage() {
                 />
               </div>
 
+              {/* ERROR */}
+
               {error && (
                 <div className="rounded-xl bg-red-50 p-4 text-sm text-red-700">
                   {error}
                 </div>
               )}
+
+              {/* SUBMIT */}
 
               <button
                 type="submit"
@@ -295,6 +376,7 @@ export default function MasterclassPage() {
                 Registration details are used to coordinate
                 the masterclass and session.
               </p>
+
             </form>
           </div>
         </div>
@@ -305,6 +387,7 @@ export default function MasterclassPage() {
       <section className="bg-slate-100 px-4 py-14 text-slate-900 md:px-6 md:py-20">
         <div className="mx-auto max-w-5xl">
           <div className="grid gap-6 md:grid-cols-3">
+
             <div className="rounded-3xl bg-white p-7 shadow-sm">
               <p className="text-sm font-bold uppercase tracking-wide text-slate-500">
                 Explore
@@ -349,6 +432,7 @@ export default function MasterclassPage() {
                 idea into action.
               </p>
             </div>
+
           </div>
         </div>
       </section>
