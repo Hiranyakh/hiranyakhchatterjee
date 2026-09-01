@@ -14,7 +14,7 @@ interface ButtonProps {
   className?: string;
 }
 
-export default function Button({
+function Button({
   children,
   href,
   variant = "primary",
@@ -48,3 +48,6 @@ export default function Button({
 
   return <button className={classes}>{children}</button>;
 }
+
+export { Button };
+export default Button;

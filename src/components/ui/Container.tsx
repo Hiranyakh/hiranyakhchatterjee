@@ -6,7 +6,7 @@ interface ContainerProps {
   className?: string;
 }
 
-export default function Container({
+function Container({
   children,
   className,
 }: ContainerProps) {
@@ -21,3 +21,6 @@ export default function Container({
     </div>
   );
 }
+
+export { Container };
+export default Container;
