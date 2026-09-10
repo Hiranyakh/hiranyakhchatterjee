@@ -16,7 +16,7 @@ export const NAVIGATION = [
     href: "/about",
   },
   {
-    title: "Discovery",
+    title: "Discovery Session™",
     href: "/discovery",
   },
 ] as const;

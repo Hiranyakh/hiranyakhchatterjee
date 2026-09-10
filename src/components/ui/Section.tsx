@@ -3,24 +3,20 @@ import { ReactNode } from "react";
 interface SectionProps {
   children: ReactNode;
   className?: string;
+  id?: string;
 }
 
-function Section({
+export default function Section({
   children,
   className = "",
+  id,
 }: SectionProps) {
   return (
     <section
-      className={`
-        py-28
-        lg:py-36
-        ${className}
-      `}
+      id={id}
+      className={`py-28 lg:py-36 ${className}`}
     >
       {children}
     </section>
   );
 }
-
-export { Section };
-export default Section;
